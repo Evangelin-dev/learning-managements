@@ -1007,18 +1007,8 @@ select:focus {
    HERO IMAGE
 ========================================= */
 
-.hero-student-image {
-  animation: heroImageFloat 6s ease-in-out infinite;
-}
 
-@keyframes heroImageFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
+/* HERO GIRL - SLIGHTLY LEFT */
 
 /* =========================================
    PREMIUM CARD HOVER
@@ -1291,3 +1281,209 @@ select:focus {
   }
 }
 
+
+
+
+/* =========================================
+   HERO STUDENT IMAGE - FINAL
+========================================= */
+
+.hero-student-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transform: translateX(-20px) scale(1.15);
+  transform-origin: center;
+  position: relative;
+  z-index: 10;
+}
+
+
+
+/* =====================================
+   HERO GIRL FLOATING ANIMATION
+===================================== */
+
+.hero-student-image {
+  object-fit: contain;
+  object-position: center;
+  transform: translateX(-20px) scale(1.15);
+  animation: girlSoftFloat 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes girlSoftFloat {
+  0%, 100% {
+    transform: translateX(-20px) translateY(0) scale(1.15);
+  }
+
+  50% {
+    transform: translateX(-20px) translateY(-9px) scale(1.15);
+  }
+}
+
+/* =====================================
+   FLOATING HERO CARDS
+===================================== */
+
+.hero-floating {
+  will-change: transform;
+}
+
+.hero-float-one {
+  animation: floatCardOne 5s ease-in-out infinite;
+}
+
+.hero-float-two {
+  animation: floatCardTwo 6s ease-in-out infinite;
+}
+
+.hero-float-three {
+  animation: floatCardThree 5.5s ease-in-out infinite;
+}
+
+@keyframes floatCardOne {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes floatCardTwo {
+  0%, 100% {
+    transform: translateY(-50%);
+  }
+
+  50% {
+    transform: translateY(calc(-50% - 10px));
+  }
+}
+
+@keyframes floatCardThree {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* =====================================
+   YOUTUBE COURSE VIDEO
+===================================== */
+
+.course-video-wrapper {
+  isolation: isolate;
+}
+
+.course-video-wrapper iframe {
+  border: 0;
+}
+
+.course-play-button {
+  animation: playButtonPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes playButtonPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(46, 196, 204, 0.45);
+  }
+
+  50% {
+    box-shadow: 0 0 0 16px rgba(46, 196, 204, 0);
+  }
+}
+
+/* =====================================
+   MOBILE RESPONSIVE
+===================================== */
+
+@media (max-width: 767px) {
+  .hero-student-image {
+    transform: translateX(-8px) scale(1.05);
+  }
+
+  .hero-float-one {
+    right: 0;
+    top: 0;
+  }
+
+  .hero-float-two {
+    right: 0;
+    top: 50%;
+  }
+
+  .hero-float-three {
+    left: 0;
+    bottom: 0;
+  }
+
+  @keyframes girlSoftFloat {
+    0%, 100% {
+      transform: translateX(-8px) translateY(0) scale(1.05);
+    }
+
+    50% {
+      transform: translateX(-8px) translateY(-7px) scale(1.05);
+    }
+  }
+}
+
+/* =====================================
+   REDUCED MOTION ACCESSIBILITY
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-student-image,
+  .hero-floating,
+  .course-play-button {
+    animation: none !important;
+  }
+}
+
+.hero-float-one {
+  animation: hero-card-float 4s ease-in-out infinite;
+}
+
+.hero-float-two {
+  animation: hero-card-float-alt 5s ease-in-out infinite;
+}
+
+@keyframes hero-card-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes hero-card-float-alt {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-float-one {
+    right: 0;
+    top: 0;
+  }
+
+  .hero-float-two {
+    right: 0;
+    top: auto;
+    bottom: 0;
+  }
+}
