@@ -1,0 +1,1293 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400&family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ========================================
+   VILAIYOSAI DESIGN SYSTEM
+======================================== */
+
+@theme inline {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Poppins", sans-serif;
+  --font-script: "Caveat", cursive;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-teal: var(--teal);
+  --color-aqua: var(--aqua);
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger-soft: var(--danger-soft);
+
+  --shadow-soft: var(--shadow-soft-value);
+  --shadow-card: var(--shadow-card-value);
+  --shadow-lift: var(--shadow-lift-value);
+}
+
+/* ========================================
+   COLOR VARIABLES
+======================================== */
+
+:root {
+  --radius: 0.75rem;
+
+  /* Exact Vilaiyosai palette */
+  --background: #FDFEED;
+  --surface: #FFFFFF;
+  --foreground: #001C3C;
+  --card: #FFFFFF;
+  --card-foreground: #001C3C;
+  --popover: #FFFFFF;
+  --popover-foreground: #001C3C;
+
+  --primary: #0056B3;
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #D6F5F6;
+  --secondary-foreground: #001C3C;
+
+  --muted: #F3F3F3;
+  --muted-foreground: #4A5B6E;
+
+  --accent: #D6F5F6;
+  --accent-foreground: #001C3C;
+
+  --destructive: #B42318;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #D6E5E8;
+  --input: #D6E5E8;
+  --ring: #0056B3;
+
+  --teal: #007C89;
+  --teal-foreground: #FFFFFF;
+  --aqua: #D6F5F6;
+
+  --ink: #001C3C;
+  --ink-foreground: #FFFFFF;
+
+  --success: #18794E;
+  --success-soft: #E8F5ED;
+  --warning: #A15C00;
+  --warning-soft: #FFF4D6;
+  --danger-soft: #FCE8E6;
+
+  --chart-1: #0056B3;
+  --chart-2: #007C89;
+  --chart-3: #2EC4CC;
+  --chart-4: #4A5B6E;
+  --chart-5: #18794E;
+
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #001C3C;
+  --sidebar-primary: #0056B3;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #D6F5F6;
+  --sidebar-accent-foreground: #001C3C;
+  --sidebar-border: #D6E5E8;
+  --sidebar-ring: #0056B3;
+
+  --shadow-soft-value:
+    0 2px 8px rgba(0, 28, 60, 0.05);
+
+  --shadow-card-value:
+    0 4px 16px rgba(0, 28, 60, 0.08);
+
+  --shadow-lift-value:
+    0 12px 30px rgba(0, 86, 179, 0.14);
+
+  --gradient-brand:
+    linear-gradient(120deg, #2EC4CC, #0056B3);
+}
+
+/* ========================================
+   BASE STYLES
+======================================== */
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    color: #001C3C;
+    letter-spacing: -0.02em;
+  }
+
+  p,
+  span,
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    font-family: var(--font-sans);
+  }
+
+  a {
+    text-underline-offset: 4px;
+  }
+
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid #0056B3;
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: #2EC4CC;
+    color: #001C3C;
+  }
+}
+
+/* ========================================
+   FONT UTILITIES
+======================================== */
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@utility font-script {
+  font-family: var(--font-script);
+}
+
+@utility bg-brand-gradient {
+  background-image: var(--gradient-brand);
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (width >= 64rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* ========================================
+   BUTTON INTERACTIONS
+======================================== */
+
+@layer components {
+  .btn-primary {
+    background-color: #0056B3;
+    color: #FFFFFF;
+    transition:
+      background-color 180ms ease,
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #004494;
+  }
+
+  .btn-primary:active {
+    background-color: #003A7D;
+    transform: scale(0.98);
+  }
+
+  .btn-outline {
+    border: 2px solid #0056B3;
+    background-color: transparent;
+    color: #0056B3;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .btn-outline:hover {
+    background-color: #0056B3;
+    color: #FFFFFF;
+  }
+
+  .btn-outline:active {
+    background-color: #004494;
+    color: #FFFFFF;
+  }
+
+  .text-link {
+    color: #007C89;
+    transition: color 180ms ease;
+  }
+
+  .text-link:hover {
+    color: #005F6B;
+    text-decoration: underline;
+    text-decoration-color: #2EC4CC;
+    text-decoration-thickness: 2px;
+  }
+}
+
+/* ========================================
+   CARD HOVER
+======================================== */
+
+.card-hover {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  border-color: #2EC4CC;
+  box-shadow: var(--shadow-lift);
+}
+
+/* ========================================
+   IMAGE HOVER
+======================================== */
+
+.image-hover {
+  transition:
+    transform 200ms ease,
+    filter 200ms ease;
+}
+
+.image-hover:hover {
+  transform: scale(1.04);
+  filter: saturate(1.08);
+}
+
+/* ========================================
+   HOMEPAGE ANIMATIONS
+======================================== */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatImage {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes softGlow {
+  0%, 100% {
+    box-shadow: 0 8px 25px rgba(0, 124, 137, 0.08);
+  }
+
+  50% {
+    box-shadow: 0 14px 35px rgba(0, 124, 137, 0.16);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 650ms ease-out both;
+}
+
+.animate-fade-up-delay {
+  animation: fadeUp 750ms ease-out 180ms both;
+}
+
+.animate-float {
+  animation: floatImage 4s ease-in-out infinite;
+}
+
+.animate-soft-glow {
+  animation: softGlow 3s ease-in-out infinite;
+}
+
+/* ========================================
+   INPUTS
+======================================== */
+
+input,
+textarea,
+select {
+  border-color: #D6E5E8;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #0056B3;
+  outline: 2px solid #0056B3;
+  outline-offset: 2px;
+}
+
+/* ========================================
+   REDUCED MOTION ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-fade-up,
+  .animate-fade-up-delay,
+  .animate-float,
+  .animate-soft-glow {
+    animation: none !important;
+  }
+
+  .image-hover,
+  .card-hover {
+    transition: none !important;
+  }
+}
+
+/* ==========================================
+   VILAIYOSAI - PREMIUM ANIMATIONS
+========================================== */
+
+/* Smooth entrance */
+@keyframes premiumFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes premiumFadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(-35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes premiumFadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Floating effect */
+@keyframes premiumFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Background glow */
+@keyframes premiumGlow {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.15);
+  }
+}
+
+/* Moving shine */
+@keyframes premiumShine {
+  from {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  to {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+/* Soft pulse */
+@keyframes premiumPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(46, 196, 204, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(46, 196, 204, 0.12);
+  }
+}
+
+.animate-premium-up {
+  animation: premiumFadeUp 0.8s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.animate-premium-right {
+  animation: premiumFadeRight 0.8s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.animate-premium-left {
+  animation: premiumFadeLeft 0.8s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.animate-premium-float {
+  animation: premiumFloat 5s ease-in-out infinite;
+}
+
+.animate-premium-glow {
+  animation: premiumGlow 6s ease-in-out infinite;
+}
+
+.animate-premium-pulse {
+  animation: premiumPulse 3s ease-in-out infinite;
+}
+
+/* Staggered entrance */
+.delay-premium-1 {
+  animation-delay: 100ms;
+}
+
+.delay-premium-2 {
+  animation-delay: 200ms;
+}
+
+.delay-premium-3 {
+  animation-delay: 300ms;
+}
+
+.delay-premium-4 {
+  animation-delay: 400ms;
+}
+
+.delay-premium-5 {
+  animation-delay: 500ms;
+}
+
+/* Premium card hover */
+.premium-card {
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    border-color 300ms ease;
+}
+
+.premium-card:hover {
+  transform: translateY(-7px);
+  border-color: #2EC4CC;
+  box-shadow: 0 18px 40px rgba(0, 28, 60, 0.11);
+}
+
+/* Image hover */
+.premium-image {
+  transition: transform 600ms cubic-bezier(.2,.8,.2,1);
+}
+
+.group:hover .premium-image {
+  transform: scale(1.07);
+}
+
+/* Button shine */
+.premium-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.premium-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 35%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.25),
+    transparent
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+}
+
+.premium-button:hover::after {
+  animation: premiumShine 0.8s ease;
+}
+
+/* FAQ smooth hover */
+.premium-accordion {
+  transition: background-color 200ms ease;
+}
+
+.premium-accordion:hover {
+  background-color: #F5FCFC;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animate-premium-up,
+  .animate-premium-right,
+  .animate-premium-left,
+  .animate-premium-float,
+  .animate-premium-glow,
+  .animate-premium-pulse {
+    animation: none !important;
+  }
+
+  .premium-card,
+  .premium-image {
+    transition: none !important;
+  }
+
+  .premium-card:hover {
+    transform: none;
+  }
+}
+
+
+/* FLOATING HERO INFORMATION CARDS */
+
+@keyframes floatingStudentCard {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes floatingCourseCard {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(15px);
+  }
+}
+
+.floating-info-card {
+  animation-duration: 4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.floating-card-one {
+  animation-name: floatingStudentCard;
+}
+
+.floating-card-two {
+  animation-name: floatingCourseCard;
+  animation-delay: 0.7s;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .floating-info-card {
+    gap: 8px;
+    padding: 9px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .floating-info-card {
+    animation: none;
+  }
+}
+
+/* =================================
+   HERO DECORATIVE ANIMATIONS
+================================= */
+
+@keyframes heroTwinkle {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(18deg);
+  }
+}
+
+@keyframes heroFloatBook {
+  0%, 100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+}
+
+@keyframes heroFloatCap {
+  0%, 100% {
+    transform: translateY(0) rotate(5deg);
+  }
+  50% {
+    transform: translateY(13px) rotate(-7deg);
+  }
+}
+
+@keyframes heroDotMove {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-12px) scale(1.4);
+    opacity: 1;
+  }
+}
+
+.hero-star {
+  pointer-events: none;
+  animation: heroTwinkle 2.5s ease-in-out infinite;
+}
+
+.hero-star-yellow {
+  animation-delay: 0s;
+}
+
+.hero-star-blue {
+  animation-delay: 0.8s;
+}
+
+.hero-star-pink {
+  animation-delay: 1.4s;
+}
+
+.hero-floating-book {
+  animation: heroFloatBook 4s ease-in-out infinite;
+}
+
+.hero-floating-cap {
+  animation: heroFloatCap 4.5s ease-in-out infinite;
+}
+
+.hero-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  animation: heroDotMove 3s ease-in-out infinite;
+}
+
+.hero-dot-yellow {
+  background: #FFD43B;
+}
+
+.hero-dot-blue {
+  background: #0056B3;
+  animation-delay: 0.7s;
+}
+
+.hero-dot-pink {
+  background: #F472B6;
+  animation-delay: 1.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-star,
+  .hero-floating-book,
+  .hero-floating-cap,
+  .hero-dot {
+    animation: none;
+  }
+}
+
+
+
+/* =========================================
+   VILAIYOSAI - HOMEPAGE DECORATIVE ANIMATIONS
+========================================= */
+
+@keyframes pageStarTwinkle {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(0.8) rotate(-10deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(15deg);
+  }
+}
+
+@keyframes pageBookFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+
+  50% {
+    transform: translateY(-16px) rotate(8deg);
+  }
+}
+
+@keyframes pageCapFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(6deg);
+  }
+
+  50% {
+    transform: translateY(14px) rotate(-6deg);
+  }
+}
+
+@keyframes pageDotsFloat {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: translateY(-12px);
+    opacity: 1;
+  }
+}
+
+/* Stars animation */
+
+.page-star {
+  pointer-events: none;
+  animation: pageStarTwinkle 3s ease-in-out infinite;
+}
+
+.page-star-yellow {
+  animation-delay: 0s;
+}
+
+.page-star-blue {
+  animation-delay: 0.8s;
+}
+
+.page-star-pink {
+  animation-delay: 1.5s;
+}
+
+/* Floating book */
+
+.page-float-book {
+  pointer-events: none;
+  animation: pageBookFloat 4s ease-in-out infinite;
+}
+
+/* Floating graduation cap */
+
+.page-float-cap {
+  pointer-events: none;
+  animation: pageCapFloat 4.5s ease-in-out infinite;
+}
+
+/* Colorful moving dots */
+
+.page-dots {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  pointer-events: none;
+  animation: pageDotsFloat 3s ease-in-out infinite;
+}
+
+.page-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.page-dots span:nth-child(1) {
+  background: #FFD43B;
+}
+
+.page-dots span:nth-child(2) {
+  background: #0056B3;
+}
+
+.page-dots span:nth-child(3) {
+  background: #F472B6;
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .page-star,
+  .page-float-book,
+  .page-float-cap,
+  .page-dots {
+    animation: none !important;
+  }
+}
+
+/* =========================================
+   EXTRA DECORATIVE ANIMATION POLISH
+========================================= */
+
+.page-float-book,
+.page-float-cap {
+  pointer-events: none;
+  display: block;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.page-float-book {
+  animation: pageBookFloat 4s ease-in-out infinite;
+}
+
+.page-float-cap {
+  animation: pageCapFloat 4.5s ease-in-out infinite;
+}
+
+.page-star {
+  will-change: transform, opacity;
+}
+
+.page-dots {
+  will-change: transform, opacity;
+}
+
+.premium-card {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-float-book,
+  .page-float-cap,
+  .page-star,
+  .page-dots {
+    animation: none !important;
+  }
+}
+
+/* =========================================
+   PREMIUM SCROLL REVEAL
+========================================= */
+
+.premium-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.premium-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================
+   FLOATING COURSE CARD
+========================================= */
+
+.floating-course-card {
+  animation: courseCardFloat 5s ease-in-out infinite;
+  transition: box-shadow 300ms ease;
+}
+
+.floating-course-card:hover {
+  box-shadow: 0 25px 50px rgba(0, 28, 60, 0.2);
+}
+
+@keyframes courseCardFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* =========================================
+   EXISTING FLOATING INFO CARDS
+========================================= */
+
+.floating-card-one {
+  animation: floatCardOne 5s ease-in-out infinite;
+}
+
+.floating-card-two {
+  animation: floatCardTwo 6s ease-in-out infinite;
+}
+
+@keyframes floatCardOne {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes floatCardTwo {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* =========================================
+   HERO IMAGE
+========================================= */
+
+.hero-student-image {
+  animation: heroImageFloat 6s ease-in-out infinite;
+}
+
+@keyframes heroImageFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* =========================================
+   PREMIUM CARD HOVER
+========================================= */
+
+.premium-card {
+  transition:
+    transform 350ms ease,
+    box-shadow 350ms ease,
+    border-color 350ms ease;
+}
+
+.premium-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 22px 45px rgba(0, 28, 60, 0.10);
+  border-color: rgba(46, 196, 204, 0.65);
+}
+
+/* =========================================
+   IMAGE HOVER
+========================================= */
+
+.premium-image {
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.group:hover .premium-image {
+  transform: scale(1.06);
+}
+
+/* =========================================
+   DECORATIVE STARS
+========================================= */
+
+.page-star {
+  animation: starFloat 5s ease-in-out infinite;
+}
+
+.page-star-yellow {
+  animation-delay: 0s;
+}
+
+.page-star-blue {
+  animation-delay: 1s;
+}
+
+.page-star-pink {
+  animation-delay: 2s;
+}
+
+@keyframes starFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-12px) rotate(18deg) scale(1.12);
+  }
+}
+
+/* =========================================
+   FLOATING BOOK & CAP
+========================================= */
+
+.page-float-book {
+  animation: bookFloat 6s ease-in-out infinite;
+}
+
+.page-float-cap {
+  animation: capFloat 5s ease-in-out infinite;
+}
+
+@keyframes bookFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(8deg);
+  }
+}
+
+@keyframes capFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-8deg);
+  }
+}
+
+/* =========================================
+   DECORATIVE DOTS
+========================================= */
+
+.page-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.page-dots span {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  animation: dotBounce 1.8s ease-in-out infinite;
+}
+
+.page-dots span:nth-child(1) {
+  background: #FFD43B;
+}
+
+.page-dots span:nth-child(2) {
+  background: #0056B3;
+  animation-delay: 0.2s;
+}
+
+.page-dots span:nth-child(3) {
+  background: #F472B6;
+  animation-delay: 0.4s;
+}
+
+@keyframes dotBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+/* =========================================
+   PREMIUM GLOW
+========================================= */
+
+.animate-soft-glow {
+  animation: softGlow 3s ease-in-out infinite;
+}
+
+@keyframes softGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(46, 196, 204, 0);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(46, 196, 204, 0.35);
+  }
+}
+
+.animate-premium-glow {
+  animation: premiumGlow 5s ease-in-out infinite alternate;
+}
+
+@keyframes premiumGlow {
+  from {
+    opacity: 0.35;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+.animate-premium-float {
+  animation: premiumFloat 8s ease-in-out infinite;
+}
+
+@keyframes premiumFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(8deg);
+  }
+}
+
+/* =========================================
+   TESTIMONIAL TRANSITION
+========================================= */
+
+.testimonial-text {
+  animation: testimonialEnter 450ms ease both;
+}
+
+@keyframes testimonialEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   CERTIFICATE HOVER
+========================================= */
+
+.certificate-scene {
+  perspective: 1000px;
+}
+
+.certificate-card {
+  transform: rotateY(-4deg) rotateX(2deg);
+  transition: transform 500ms ease, box-shadow 500ms ease;
+}
+
+.certificate-card:hover {
+  transform: rotateY(0deg) rotateX(0deg) translateY(-5px);
+  box-shadow: 0 28px 60px rgba(0, 28, 60, 0.16);
+}
+
+/* =========================================
+   FOOTER LINKS
+========================================= */
+
+.footer-link {
+  display: block;
+  width: fit-content;
+  transition:
+    color 250ms ease,
+    transform 250ms ease;
+}
+
+.footer-link:hover {
+  color: #2EC4CC;
+  transform: translateX(5px);
+}
+
+/* =========================================
+   BUTTON HOVER
+========================================= */
+
+.premium-button {
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    background-color 250ms ease;
+}
+
+.premium-button:hover {
+  box-shadow: 0 12px 25px rgba(0, 86, 179, 0.2);
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .premium-reveal,
+  .floating-course-card,
+  .floating-card-one,
+  .floating-card-two,
+  .hero-student-image,
+  .page-star,
+  .page-float-book,
+  .page-float-cap,
+  .page-dots span,
+  .animate-soft-glow,
+  .animate-premium-glow,
+  .animate-premium-float,
+  .testimonial-text {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .premium-reveal {
+    opacity: 1;
+  }
+}
+
