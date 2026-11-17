@@ -1,7 +1,7 @@
 
 import { Link } from "@tanstack/react-router";
 import { Menu, Search, ShoppingCart } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -26,8 +26,51 @@ const navLinkClass =
 const activeNavClass =
   "data-[status=active]:text-[#001C3C] data-[status=active]:after:absolute data-[status=active]:after:inset-x-0 data-[status=active]:after:-bottom-0.5 data-[status=active]:after:h-0.5 data-[status=active]:after:rounded-full data-[status=active]:after:bg-[#2EC4CC]";
 
+interface CartItem {
+  id: string;
+  title: string;
+  price: number;
+  quantity: number;
+}
+
+function getCartCount() {
+  try {
+    const cart: CartItem[] = JSON.parse(
+      localStorage.getItem("learning-cart") || "[]"
+    );
+
+    return cart.reduce(
+      (total, item) => total + (Number(item.quantity) || 1),
+      0
+    );
+  } catch {
+    return 0;
+  }
+}
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    const updateCartCount = () => {
+      setCartCount(getCartCount());
+    };
+
+    // Initial cart count
+    updateCartCount();
+
+    // Listen for Add to Cart events
+    window.addEventListener("cart-updated", updateCartCount);
+
+    // Update when returning to this browser tab
+    window.addEventListener("storage", updateCartCount);
+
+    return () => {
+      window.removeEventListener("cart-updated", updateCartCount);
+      window.removeEventListener("storage", updateCartCount);
+    };
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 border-b border-[#E5EDF3] bg-white shadow-[0_2px_12px_rgba(0,28,60,0.06)]">
@@ -52,7 +95,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        {/* Desktop Actions - All in one line */}
+        {/* Desktop Actions */}
         <div className="hidden shrink-0 items-center gap-3 xl:flex">
 
           {/* My Learning */}
@@ -80,21 +123,20 @@ export function SiteHeader() {
             />
           </form>
 
-         
-          {/* Shopping Cart */}
+          {/* Shopping Cart with Live Count */}
           <Link
             to="/cart"
-            aria-label="Shopping cart"
+            aria-label={`Shopping cart, ${cartCount} items`}
             className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[#001C3C] transition-colors hover:bg-[#D6F5F6] hover:text-[#0056B3]"
           >
             <ShoppingCart className="h-5 w-5" />
 
-            <span className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-[#2EC4CC] text-[10px] font-bold text-[#001C3C]">
-              0
+            <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-[#2EC4CC] px-1 text-[10px] font-bold text-[#001C3C]">
+              {cartCount > 99 ? "99+" : cartCount}
             </span>
           </Link>
 
-          {/* Existing Login */}
+          {/* Login */}
           <Button
             asChild
             className="rounded-full bg-[#0056B3] px-6 font-sans text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#004494] hover:shadow-md active:bg-[#003A7D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0056B3]"
@@ -120,7 +162,9 @@ export function SiteHeader() {
             side="right"
             className="w-80 border-l border-[#E5EDF3] bg-white"
           >
-            <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+            <SheetTitle className="sr-only">
+              Navigation Menu
+            </SheetTitle>
 
             <div className="mt-8 flex flex-col gap-2">
               <div className="mb-5 border-b border-[#E5EDF3] pb-5">
@@ -157,6 +201,7 @@ export function SiteHeader() {
 
               <div className="mt-5 grid gap-3 border-t border-[#E5EDF3] pt-5">
 
+                {/* My Learning */}
                 <Button
                   asChild
                   variant="outline"
@@ -166,18 +211,24 @@ export function SiteHeader() {
                   <Link to="/dashboard">My Learning</Link>
                 </Button>
 
+                {/* Mobile Cart with Count */}
                 <Button
                   asChild
                   variant="outline"
                   onClick={() => setOpen(false)}
                   className="h-11 rounded-full border-2 border-[#DCE8EF] font-sans text-base font-semibold text-[#001C3C] hover:bg-[#D6F5F6]"
                 >
-                  <Link to="/cart">
+                  <Link to="/cart" className="flex items-center justify-center">
                     <ShoppingCart className="mr-2 h-5 w-5" />
                     Shopping Cart
+
+                    <span className="ml-2 grid h-5 min-w-5 place-items-center rounded-full bg-[#2EC4CC] px-1 text-xs font-bold text-[#001C3C]">
+                      {cartCount}
+                    </span>
                   </Link>
                 </Button>
 
+                {/* Login */}
                 <Button
                   asChild
                   onClick={() => setOpen(false)}

@@ -1,4 +1,6 @@
 
+import { useState } from "react";
+import { PaymentModal } from "@/components/site/PaymentModal";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Award,
@@ -62,17 +64,19 @@ const cardClass =
   "rounded-2xl border border-[#E1E8ED] bg-white shadow-[0_3px_16px_rgba(0,28,60,0.05)]";
 
 function Home() {
+  const [paymentOpen, setPaymentOpen] = useState(false);
+
+  const openPayment = () => setPaymentOpen(true);
+
   return (
     <main className="bg-[#FDFEED]">
-
       {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-[#001C3C] text-[#FDFEED]">
         <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-[#2EC4CC]/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 -left-32 h-96 w-96 rounded-full bg-[#0056B3]/20 blur-3xl" />
 
-        <div className="container-page relative grid gap-8 py-10 sm:gap-10 sm:py-14 lg:grid-cols-[1fr_380px] lg:gap-14 lg:py-20">
-
-          <div>
+        <div className="container-page relative py-10 sm:py-14 lg:py-20">
+          <div className="max-w-4xl">
             <Badge className="border border-[#2EC4CC]/30 bg-[#2EC4CC] px-3 py-1.5 font-sans text-xs font-semibold text-[#001C3C] hover:bg-[#2EC4CC]">
               Bestseller · Share Market Course
             </Badge>
@@ -86,7 +90,6 @@ function Home() {
             </p>
 
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 font-sans text-sm">
-
               <span className="flex items-center gap-1.5 font-semibold text-[#FDFEED]">
                 {COURSE.rating}
                 <Star className="h-4 w-4 fill-[#F5B942] text-[#F5B942]" />
@@ -126,42 +129,21 @@ function Home() {
                 {COURSE.language}
               </span>
             </div>
-
-            <div className="mt-8 lg:hidden">
-              <Button
-                asChild
-                size="lg"
-                className={`h-12 w-full rounded-full px-5 font-sans font-semibold sm:w-auto sm:px-7 ${primaryButton}`}
-              >
-                <Link
-                  to="/checkout/$courseId"
-                  params={{ courseId: COURSE.id }}
-                >
-                  Buy Now — {formatPrice(COURSE.discountPrice)}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
           </div>
-
-          {/* DESKTOP PURCHASE CARD */}
-          <aside className="hidden lg:block">
-            <BuyCard />
-          </aside>
         </div>
       </section>
 
       {/* MOBILE PURCHASE CARD */}
       <div className="container-page py-6 sm:py-8 lg:hidden">
-        <BuyCard />
+        <BuyCard onBuyNow={openPayment} />
       </div>
 
-      {/* COURSE CONTENT */}
-<div
-  id="course-content"
-  className="container-page grid scroll-mt-24 gap-8 py-8 sm:gap-12 sm:py-10 lg:grid-cols-[1fr_380px] lg:py-16"
->
-
+      {/* COURSE CONTENT + STICKY PURCHASE CARD */}
+      <div
+        id="course-content"
+        className="container-page grid scroll-mt-24 gap-8 py-8 sm:gap-12 sm:py-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-12 lg:py-16"
+      >
+        {/* LEFT SIDE: SCROLLABLE COURSE DETAILS */}
         <div className="min-w-0 space-y-10 sm:space-y-14">
 
           {/* WHAT YOU WILL LEARN */}
@@ -203,6 +185,7 @@ function Home() {
                   ShieldCheck,
                   Clock,
                 ];
+
                 const Icon = icons[index % icons.length];
 
                 return (
@@ -235,7 +218,7 @@ function Home() {
 
             <Accordion
               type="multiple"
-              defaultValue={[COURSE.sections[0].id]}
+              defaultValue={COURSE.sections[0] ? [COURSE.sections[0].id] : []}
               className={`${cardClass} mt-6 overflow-hidden`}
             >
               {COURSE.sections.map((section, index) => (
@@ -281,6 +264,7 @@ function Home() {
                                 Preview
                               </span>
                             )}
+
                             <span className="text-xs text-[#4A5B6E]">
                               {lesson.duration}
                             </span>
@@ -320,6 +304,7 @@ function Home() {
                     <Star className="h-3.5 w-3.5 fill-[#F5B942] text-[#F5B942]" />
                     {COURSE.rating} instructor rating
                   </span>
+
                   <span>
                     {formatNumber(COURSE.students)} students
                   </span>
@@ -364,6 +349,7 @@ function Home() {
                     <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#D6F5F6] font-sans text-sm font-semibold text-[#001C3C]">
                       {testimonial.initials}
                     </span>
+
                     <span>
                       <span className="block font-sans text-sm font-semibold text-[#001C3C]">
                         {testimonial.name}
@@ -409,8 +395,12 @@ function Home() {
           </section>
         </div>
 
-        {/* GRID ALIGNMENT */}
-        <div className="hidden lg:block" />
+        {/* RIGHT SIDE: STICKY PAYMENT CARD */}
+        <aside className="hidden lg:block">
+          <div className="sticky top-24 -mt-[560px] self-start">
+            <BuyCard onBuyNow={openPayment} />
+          </div>
+        </aside>
       </div>
 
       {/* FINAL CTA */}
@@ -419,7 +409,6 @@ function Home() {
           <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#2EC4CC]/20 blur-3xl" />
 
           <div className="relative grid items-center gap-8 sm:gap-10 lg:grid-cols-[1.4fr_1fr]">
-
             <div>
               <p className="font-script text-2xl text-[#007C89]">
                 Your journey starts here!
@@ -466,17 +455,12 @@ function Home() {
               </div>
 
               <Button
-                asChild
+                onClick={openPayment}
                 size="lg"
                 className={`mt-7 h-12 w-full rounded-full font-sans font-semibold ${primaryButton}`}
               >
-                <Link
-                  to="/checkout/$courseId"
-                  params={{ courseId: COURSE.id }}
-                >
-                  Buy Now
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+                Buy Now
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
 
               <Button
@@ -495,6 +479,17 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* DEMO PAYMENT MODAL */}
+      <PaymentModal
+        open={paymentOpen}
+        onClose={() => setPaymentOpen(false)}
+        amount={COURSE.discountPrice}
+        courseName={COURSE.title}
+        onSuccess={() => {
+          console.log("Demo payment successful");
+        }}
+      />
     </main>
   );
 }
@@ -512,6 +507,7 @@ function SectionHeading({
       <p className="font-sans text-xs font-semibold tracking-[0.15em] text-[#007C89]">
         {eyebrow}
       </p>
+
       <h2 className="mt-2 font-display text-2xl font-semibold text-[#001C3C] sm:text-[28px]">
         {title}
       </h2>
@@ -520,10 +516,9 @@ function SectionHeading({
 }
 
 /* PURCHASE CARD */
-function BuyCard() {
+function BuyCard({ onBuyNow }: { onBuyNow: () => void }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#E1E8ED] bg-white text-[#001C3C] shadow-[0_8px_30px_rgba(0,28,60,0.12)] lg:sticky lg:top-24">
-
+    <div className="overflow-hidden rounded-2xl border border-[#E1E8ED] bg-white text-[#001C3C] shadow-[0_8px_30px_rgba(0,28,60,0.12)]">
       <Link
         to="/courses/$courseId"
         params={{ courseId: COURSE.id }}
@@ -561,30 +556,25 @@ function BuyCard() {
         </div>
 
         <Button
-          asChild
+          onClick={onBuyNow}
           size="lg"
           className={`mt-6 h-12 w-full rounded-full font-sans font-semibold ${primaryButton}`}
         >
-          <Link
-            to="/checkout/$courseId"
-            params={{ courseId: COURSE.id }}
-          >
-            Buy Now
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
+          Buy Now
+          <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
 
         <Button
-  asChild
-  size="lg"
-  variant="outline"
-  className={`mt-3 h-12 w-full rounded-full font-sans font-semibold ${outlineButton}`}
->
-  <a href="#course-content">
-    View Full Course Details
-    <ArrowRight className="ml-2 h-4 w-4" />
-  </a>
-</Button>
+          asChild
+          size="lg"
+          variant="outline"
+          className={`mt-3 h-12 w-full rounded-full font-sans font-semibold ${outlineButton}`}
+        >
+          <a href="#course-content">
+            View Full Course Details
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </a>
+        </Button>
 
         <p className="mt-4 text-center font-sans text-xs text-[#4A5B6E]">
           7-day money-back guarantee

@@ -1,6 +1,7 @@
 
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import {
   ArrowRight,
   BookOpen,
@@ -42,8 +43,7 @@ const course = {
    YOUTUBE VIDEO
 ========================================= */
 
-// Sample YouTube video ID.
-// Replace it with your actual course video ID when available.
+// Replace this sample ID with your actual course video ID.
 const YOUTUBE_VIDEO_ID = "M7lc1UVf-VE";
 
 /* =========================================
@@ -181,7 +181,7 @@ function Reveal({
   className = "",
   delay = 0,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   delay?: number;
 }) {
@@ -189,6 +189,7 @@ function Reveal({
 
   useEffect(() => {
     const element = elementRef.current;
+
     if (!element) return;
 
     const observer = new IntersectionObserver(
@@ -238,6 +239,7 @@ function AnimatedCounter({
 
   useEffect(() => {
     const element = counterRef.current;
+
     if (!element) return;
 
     let animationFrame = 0;
@@ -299,8 +301,6 @@ function AnimatedCounter({
 }
 
 /* =========================================
- 
-/* =========================================
    PAGE DECORATIONS
 ========================================= */
 
@@ -310,7 +310,6 @@ function PageDecorations() {
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
       aria-hidden="true"
     >
-      {/* Yellow Star - Top Left */}
       <Star
         className="page-star page-star-yellow absolute left-[5%] top-[12%]"
         size={22}
@@ -318,7 +317,6 @@ function PageDecorations() {
         stroke="#FFD43B"
       />
 
-      {/* Blue Star - Top Right */}
       <Star
         className="page-star page-star-blue absolute right-[5%] top-[12%]"
         size={23}
@@ -326,7 +324,6 @@ function PageDecorations() {
         stroke="#0056B3"
       />
 
-      {/* Pink Sparkles - Bottom Left */}
       <Sparkles
         className="page-star page-star-pink absolute bottom-[12%] left-[10%]"
         size={25}
@@ -334,17 +331,14 @@ function PageDecorations() {
         stroke="#F472B6"
       />
 
-      {/* Floating Book - Left Side */}
       <div className="page-float-book absolute left-[4%] top-[48%] text-[#0056B3]">
         <BookOpen size={30} />
       </div>
 
-      {/* Graduation Cap - Right Side */}
       <div className="page-float-cap absolute bottom-[18%] right-[4%] text-[#007C89]">
         <GraduationCap size={38} />
       </div>
 
-      {/* Small Decorative Dots */}
       <div className="page-dots absolute bottom-[18%] left-[25%]">
         <span />
         <span />
@@ -391,7 +385,9 @@ function SectionHeading({
 export const Route = createFileRoute("/_site/")({
   head: () => ({
     meta: [
-      { title: "Vilaiyosai — Learn Skills for the Future" },
+      {
+        title: "Vilaiyosai — Learn Skills for the Future",
+      },
       {
         name: "description",
         content:
@@ -496,7 +492,11 @@ function Home() {
               <div className="mt-9 flex flex-wrap items-center gap-2 text-sm">
                 <div className="flex text-amber-400">
                   {[1, 2, 3, 4, 5].map((item) => (
-                    <Star key={item} size={16} fill="currentColor" />
+                    <Star
+                      key={item}
+                      size={16}
+                      fill="currentColor"
+                    />
                   ))}
                 </div>
 
@@ -526,39 +526,44 @@ function Home() {
                 <img
                   src="/images/hero-girl.png"
                   alt="Vilaiyosai Student"
-                  className="hero-student-image h-full w-full object-contain object-center"
+                  className="hero-student-image relative z-10 h-full w-full scale-[1.12] translate-x-4 object-contain object-center"
                 />
               </div>
 
               {/* EXPERT COURSES CARD */}
 
-              <div className="hero-floating hero-float-one absolute right-0 top-4 z-20 flex items-center gap-3 rounded-2xl border border-white/80 bg-white/95 p-3 shadow-xl backdrop-blur-xl md:-right-20 md:top-8 md:p-4">
+             <div className="hero-floating hero-float-one absolute right-2 top-[68%] z-20 flex max-w-[calc(100%-16px)] items-center gap-3 rounded-2xl border border-white/80 bg-white/95 p-3 shadow-xl backdrop-blur-xl md:right-2 md:top-[68%] md:p-4">
 
                 <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#D6F5F6] text-[#007C89] md:h-14 md:w-14">
                   <BookOpen size={26} />
                 </div>
 
                 <div>
-                 <p className="text-xl font-extrabold text-[#001C3C] md:text-2xl">
-                1
-              </p>
+                  <p className="text-xl font-extrabold text-[#001C3C] md:text-2xl">
+                    1
+                  </p>
 
-              <p className="text-[11px] font-medium text-[#4A5B6E] md:text-sm">
-                Specialized AI Course
-              </p>
+                  <p className="text-[11px] font-medium text-[#4A5B6E] md:text-sm">
+                    Specialized AI Course
+                  </p>
                 </div>
               </div>
 
               {/* FEATURED COURSE CARD */}
 
-              <div className="hero-floating hero-float-two absolute right-0 top-1/2 z-30 w-[180px] -translate-y-1/2 rounded-2xl border border-white/80 bg-white/95 p-3 shadow-2xl backdrop-blur-xl md:-right-24 md:w-[220px] md:p-4">
+              
+<div className="hero-floating hero-float-two absolute left-0 top-[8%] z-30 w-[180px] max-w-[calc(100%-16px)] rounded-2xl border border-white/80 bg-white/95 p-3 shadow-2xl backdrop-blur-xl md:left-0 md:top-[8%] md:w-[220px] md:p-4">
+
 
                 <div className="flex items-center justify-between gap-2">
                   <span className="rounded-full bg-[#D6F5F6] px-2.5 py-1 text-[9px] font-extrabold tracking-wide text-[#007C89] md:text-[10px]">
                     FEATURED COURSE
                   </span>
 
-                  <Sparkles size={15} className="text-[#007C89]" />
+                  <Sparkles
+                    size={15}
+                    className="text-[#007C89]"
+                  />
                 </div>
 
                 <h3 className="mt-3 text-xs font-extrabold leading-5 text-[#001C3C] md:text-sm">
@@ -566,7 +571,11 @@ function Home() {
                 </h3>
 
                 <div className="mt-2 flex items-center gap-1.5 text-xs">
-                  <Star size={13} fill="#FBBF24" className="text-amber-400" />
+                  <Star
+                    size={13}
+                    fill="#FBBF24"
+                    className="text-amber-400"
+                  />
 
                   <span className="font-bold text-[#001C3C]">
                     4.7
@@ -583,13 +592,15 @@ function Home() {
 
                 <div className="mt-2 flex items-center justify-between text-[10px] font-semibold text-[#4A5B6E]">
                   <span>Project-based learning</span>
-                  <span className="text-[#007C89]">8 projects</span>
+                  <span className="text-[#007C89]">
+                    8 projects
+                  </span>
                 </div>
               </div>
 
               {/* ONLINE STUDENTS CARD */}
 
-              <div className="hero-floating hero-float-three absolute bottom-4 left-0 z-20 flex items-center gap-3 rounded-2xl border border-white/80 bg-white/95 p-3 shadow-xl backdrop-blur-xl md:-left-20 md:bottom-8 md:p-4">
+              <div className="hero-floating hero-float-three absolute bottom-4 left-2 z-20 flex max-w-[calc(100%-16px)] items-center gap-3 rounded-2xl border border-white/80 bg-white/95 p-3 shadow-xl backdrop-blur-xl md:bottom-8 md:left-2 md:p-4">
 
                 <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#D6F5F6] text-[#007C89] md:h-14 md:w-14">
                   <Users size={26} />
@@ -631,7 +642,9 @@ function Home() {
                 </div>
 
                 <div>
-                  <h3 className="font-bold">{item.title}</h3>
+                  <h3 className="font-bold">
+                    {item.title}
+                  </h3>
 
                   <p className="mt-1 text-xs text-white/65">
                     {item.subtitle}
@@ -837,7 +850,6 @@ function Home() {
                 ) : (
 
                   <>
-
                     <img
                       src={`https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/hqdefault.jpg`}
                       alt="AI Engineering Course Video Preview"
@@ -880,9 +892,7 @@ function Home() {
                       </span>
 
                     </div>
-
                   </>
-
                 )}
 
               </div>
@@ -956,12 +966,10 @@ function Home() {
                 </div>
 
                 <a href="/courses/ai-agentic" className="mt-7 block">
-
                   <Button className="premium-button h-12 w-full rounded-xl bg-[#0056B3] font-bold text-white transition-all duration-200 hover:-translate-y-1 hover:bg-[#004494]">
                     Explore Course Details
                     <ArrowRight className="ml-2" size={18} />
                   </Button>
-
                 </a>
 
               </div>
@@ -1311,9 +1319,9 @@ function Home() {
                 <Sparkles size={34} />
               </div>
 
-             <h2 className="text-3xl font-extrabold text-white md:text-5xl">
-              Ready to Start Learning?
-            </h2>
+              <h2 className="text-3xl font-extrabold text-white md:text-5xl">
+                Ready to Start Learning?
+              </h2>
 
               <p className="mx-auto mt-5 max-w-xl leading-7 text-white/70">
                 Take the first step towards building your future.
@@ -1321,12 +1329,10 @@ function Home() {
               </p>
 
               <a href="/courses/ai-agentic" className="mt-8 inline-block">
-
                 <Button className="premium-button h-12 rounded-xl bg-[#0056B3] px-8 font-bold text-white transition-all duration-200 hover:-translate-y-1 hover:bg-[#004494]">
                   Explore the Course
                   <ArrowRight className="ml-2" size={18} />
                 </Button>
-
               </a>
 
             </div>
