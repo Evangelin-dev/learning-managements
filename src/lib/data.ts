@@ -58,7 +58,7 @@ export type Course = {
 };
 
 export const COURSE: Course = {
-  id: "share-market-mastery",
+  id: "ai-agentic",
   title: "Share Market Mastery: Zero to Confident Trader",
   categoryId: "share-market",
   instructorId: "priya",
@@ -320,13 +320,33 @@ export const testimonials = [
   { name: "Divya Lakshmi", role: "Homemaker, Coimbatore", quote: "Pay once, learn forever. Maine course do baar dekha aur ab apna khud ka portfolio manage karti hoon.", initials: "DL" },
 ];
 
+
 export const faqs = [
-  { q: "Kya ye course beginners ke liye hai?", a: "Haan, bilkul. Course zero se shuru hota hai — demat account kholne se lekar pehli trade tak sab kuch step-by-step samjhaya gaya hai." },
-  { q: "Course ki validity kitni hai?", a: "Lifetime. Ek baar kharidne ke baad aap videos kabhi bhi, kitni bhi baar dekh sakte hain." },
-  { q: "Payment ke baad access kab milta hai?", a: "Payment successful hote hi turant. Aapko email par receipt aur login details mil jaate hain." },
-  { q: "Kya refund mil sakta hai?", a: "Haan, 7 din ke andar agar course pasand na aaye toh full refund mil jaata hai. Koi sawaal nahi poochha jaata." },
-  { q: "Kya main mobile par dekh sakta hoon?", a: "Haan, website mobile, tablet aur desktop — teeno par perfectly kaam karti hai." },
-  { q: "Certificate milta hai kya?", a: "Haan, course 100% complete karne par aapko completion certificate milta hai." },
+  {
+    q: "Is this course suitable for beginners?",
+    a: "Yes, absolutely! This course starts from the basics and covers everything step by step, from opening a Demat account to making your first trade."
+  },
+  {
+    q: "How long will I have access to the course?",
+    a: "You will get lifetime access. Once you purchase the course, you can watch the lessons anytime and as many times as you like."
+  },
+  {
+    q: "When will I get access after payment?",
+    a: "You will get access immediately after your payment is successful. You will also receive the payment receipt and login details via email."
+  },
+  {
+    q: "Can I get a refund if I'm not satisfied?",
+    a: "Yes, you can request a full refund within 7 days if you are not satisfied with the course. No questions asked."
+  },
+  {
+    q: "Can I watch the course on my mobile phone?",
+    a: "Yes! You can access the course seamlessly on your mobile phone, tablet, or desktop."
+  },
+  {
+    q: "Will I receive a certificate after completing the course?",
+    a: "Yes, you will receive a certificate of completion after successfully completing 100% of the course."
+  },
 ];
+
 
 export const coupons: Record<string, number> = { WELCOME10: 10, FESTIVE20: 20 };

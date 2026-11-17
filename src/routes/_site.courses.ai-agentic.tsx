@@ -70,14 +70,14 @@ function Home() {
         <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-[#2EC4CC]/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 -left-32 h-96 w-96 rounded-full bg-[#0056B3]/20 blur-3xl" />
 
-        <div className="container-page relative grid gap-10 py-14 lg:grid-cols-[1fr_380px] lg:gap-14 lg:py-20">
+        <div className="container-page relative grid gap-8 py-10 sm:gap-10 sm:py-14 lg:grid-cols-[1fr_380px] lg:gap-14 lg:py-20">
 
           <div>
             <Badge className="border border-[#2EC4CC]/30 bg-[#2EC4CC] px-3 py-1.5 font-sans text-xs font-semibold text-[#001C3C] hover:bg-[#2EC4CC]">
               Bestseller · Share Market Course
             </Badge>
 
-            <h1 className="mt-6 max-w-3xl font-display text-3xl font-bold leading-tight text-[#FDFEED] sm:text-4xl lg:text-[44px]">
+            <h1 className="mt-5 max-w-3xl font-display text-3xl font-bold leading-tight text-[#FDFEED] sm:mt-6 sm:text-4xl lg:text-[44px]">
               {COURSE.title}
             </h1>
 
@@ -131,7 +131,7 @@ function Home() {
               <Button
                 asChild
                 size="lg"
-                className={`rounded-full px-7 font-sans font-semibold ${primaryButton}`}
+                className={`h-12 w-full rounded-full px-5 font-sans font-semibold sm:w-auto sm:px-7 ${primaryButton}`}
               >
                 <Link
                   to="/checkout/$courseId"
@@ -152,17 +152,20 @@ function Home() {
       </section>
 
       {/* MOBILE PURCHASE CARD */}
-      <div className="container-page py-8 lg:hidden">
+      <div className="container-page py-6 sm:py-8 lg:hidden">
         <BuyCard />
       </div>
 
       {/* COURSE CONTENT */}
-      <div className="container-page grid gap-12 py-10 lg:grid-cols-[1fr_380px] lg:py-16">
+<div
+  id="course-content"
+  className="container-page grid scroll-mt-24 gap-8 py-8 sm:gap-12 sm:py-10 lg:grid-cols-[1fr_380px] lg:py-16"
+>
 
-        <div className="min-w-0 space-y-14">
+        <div className="min-w-0 space-y-10 sm:space-y-14">
 
           {/* WHAT YOU WILL LEARN */}
-          <section className={`${cardClass} p-6 sm:p-8`}>
+          <section className={`${cardClass} p-4 sm:p-8`}>
             <SectionHeading
               eyebrow="YOUR LEARNING JOURNEY"
               title="What you'll learn"
@@ -190,7 +193,7 @@ function Home() {
               title="This course includes"
             />
 
-            <div className={`${cardClass} mt-6 grid gap-5 p-6 sm:grid-cols-2`}>
+            <div className={`${cardClass} mt-6 grid gap-5 p-4 sm:grid-cols-2 sm:p-6`}>
               {COURSE.includes.map((item, index) => {
                 const icons = [
                   PlayCircle,
@@ -241,7 +244,7 @@ function Home() {
                   value={section.id}
                   className="border-b border-[#E5EDF3] last:border-0"
                 >
-                  <AccordionTrigger className="px-5 py-5 text-left hover:bg-[#F8FCFC] hover:no-underline sm:px-6">
+                  <AccordionTrigger className="px-4 py-4 text-left hover:bg-[#F8FCFC] hover:no-underline sm:px-6 sm:py-5">
                     <span>
                       <span className="mb-1 block font-sans text-xs font-medium text-[#007C89]">
                         SECTION {index + 1}
@@ -252,7 +255,7 @@ function Home() {
                     </span>
                   </AccordionTrigger>
 
-                  <AccordionContent className="px-5 sm:px-6">
+                  <AccordionContent className="px-4 sm:px-6">
                     <ul className="divide-y divide-[#E5EDF3]">
                       {section.lessons.map((lesson) => (
                         <li
@@ -292,14 +295,14 @@ function Home() {
           </section>
 
           {/* INSTRUCTOR */}
-          <section className={`${cardClass} p-6 sm:p-8`}>
+          <section className={`${cardClass} p-4 sm:p-8`}>
             <SectionHeading
               eyebrow="MEET YOUR MENTOR"
               title="Your instructor"
             />
 
             <div className="mt-7 flex items-start gap-4 sm:gap-5">
-              <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-[#D6F5F6] font-display text-xl font-bold text-[#001C3C]">
+              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[#D6F5F6] font-display text-xl font-bold text-[#001C3C] sm:h-16 sm:w-16">
                 {COURSE.instructorInitials}
               </span>
 
@@ -340,7 +343,7 @@ function Home() {
               {testimonials.map((testimonial) => (
                 <figure
                   key={testimonial.name}
-                  className={`${cardClass} flex flex-col p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[#2EC4CC] hover:shadow-lg`}
+                  className={`${cardClass} flex flex-col p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[#2EC4CC] hover:shadow-lg sm:p-6`}
                 >
                   <Quote className="h-7 w-7 text-[#007C89]" />
 
@@ -393,11 +396,11 @@ function Home() {
                   value={`faq-${index}`}
                   className="border-b border-[#E5EDF3] last:border-0"
                 >
-                  <AccordionTrigger className="px-5 py-5 text-left font-sans text-sm font-semibold text-[#001C3C] hover:bg-[#F8FCFC] hover:no-underline sm:px-6">
+                  <AccordionTrigger className="px-4 py-4 text-left font-sans text-sm font-semibold text-[#001C3C] hover:bg-[#F8FCFC] hover:no-underline sm:px-6 sm:py-5">
                     {faq.q}
                   </AccordionTrigger>
 
-                  <AccordionContent className="px-5 pb-5 font-sans text-sm leading-7 text-[#4A5B6E] sm:px-6">
+                  <AccordionContent className="px-4 pb-4 font-sans text-sm leading-7 text-[#4A5B6E] sm:px-6 sm:pb-5">
                     {faq.a}
                   </AccordionContent>
                 </AccordionItem>
@@ -411,11 +414,11 @@ function Home() {
       </div>
 
       {/* FINAL CTA */}
-      <section className="container-page pb-16 pt-4 sm:pb-20">
-        <div className="relative overflow-hidden rounded-3xl border border-[#B8E9EB] bg-[#D6F5F6] p-7 sm:p-10 lg:p-12">
+      <section className="container-page pb-12 pt-2 sm:pb-20 sm:pt-4">
+        <div className="relative overflow-hidden rounded-3xl border border-[#B8E9EB] bg-[#D6F5F6] p-5 sm:p-10 lg:p-12">
           <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#2EC4CC]/20 blur-3xl" />
 
-          <div className="relative grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
+          <div className="relative grid items-center gap-8 sm:gap-10 lg:grid-cols-[1.4fr_1fr]">
 
             <div>
               <p className="font-script text-2xl text-[#007C89]">
@@ -447,9 +450,9 @@ function Home() {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-[#B8E9EB] bg-white p-6 shadow-[0_8px_30px_rgba(0,28,60,0.08)] sm:p-8">
+            <div className="rounded-2xl border border-[#B8E9EB] bg-white p-4 shadow-[0_8px_30px_rgba(0,28,60,0.08)] sm:p-8">
               <div className="flex flex-wrap items-baseline justify-center gap-3">
-                <span className="font-display text-4xl font-bold text-[#001C3C]">
+                <span className="font-display text-3xl font-bold text-[#001C3C] sm:text-4xl">
                   {formatPrice(COURSE.discountPrice)}
                 </span>
 
@@ -542,9 +545,9 @@ function BuyCard() {
         </span>
       </Link>
 
-      <div className="p-6">
-        <div className="flex flex-wrap items-baseline gap-3">
-          <span className="font-display text-3xl font-bold text-[#001C3C]">
+      <div className="p-4 sm:p-6">
+        <div className="flex flex-wrap items-baseline gap-2 sm:gap-3">
+          <span className="font-display text-2xl font-bold text-[#001C3C] sm:text-3xl">
             {formatPrice(COURSE.discountPrice)}
           </span>
 
@@ -572,18 +575,16 @@ function BuyCard() {
         </Button>
 
         <Button
-          asChild
-          size="lg"
-          variant="outline"
-          className={`mt-3 h-12 w-full rounded-full font-sans font-semibold ${outlineButton}`}
-        >
-          <Link
-            to="/courses/$courseId"
-            params={{ courseId: COURSE.id }}
-          >
-            View Full Course Details
-          </Link>
-        </Button>
+  asChild
+  size="lg"
+  variant="outline"
+  className={`mt-3 h-12 w-full rounded-full font-sans font-semibold ${outlineButton}`}
+>
+  <a href="#course-content">
+    View Full Course Details
+    <ArrowRight className="ml-2 h-4 w-4" />
+  </a>
+</Button>
 
         <p className="mt-4 text-center font-sans text-xs text-[#4A5B6E]">
           7-day money-back guarantee

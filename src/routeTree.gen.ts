@@ -15,6 +15,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
 import { Route as SiteAboutRouteImport } from './routes/_site.about'
+import { Route as SiteCartRouteImport } from './routes/_site.cart'
 import { Route as SiteContactRouteImport } from './routes/_site.contact'
 import { Route as SiteFaqRouteImport } from './routes/_site.faq'
 import { Route as SiteInstructorsRouteImport } from './routes/_site.instructors'
@@ -70,6 +71,11 @@ const SiteIndexRoute = SiteIndexRouteImport.update({
 const SiteAboutRoute = SiteAboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteCartRoute = SiteCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteContactRoute = SiteContactRouteImport.update({
@@ -214,6 +220,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
   '/about': typeof SiteAboutRoute
+  '/cart': typeof SiteCartRoute
   '/contact': typeof SiteContactRoute
   '/faq': typeof SiteFaqRoute
   '/instructors': typeof SiteInstructorsRoute
@@ -245,6 +252,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/about': typeof SiteAboutRoute
+  '/cart': typeof SiteCartRoute
   '/contact': typeof SiteContactRoute
   '/faq': typeof SiteFaqRoute
   '/instructors': typeof SiteInstructorsRoute
@@ -281,6 +289,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
   '/_site/about': typeof SiteAboutRoute
+  '/_site/cart': typeof SiteCartRoute
   '/_site/contact': typeof SiteContactRoute
   '/_site/faq': typeof SiteFaqRoute
   '/_site/instructors': typeof SiteInstructorsRoute
@@ -318,6 +327,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/login'
     | '/about'
+    | '/cart'
     | '/contact'
     | '/faq'
     | '/instructors'
@@ -349,6 +359,7 @@ export interface FileRouteTypes {
   to:
     | '/login'
     | '/about'
+    | '/cart'
     | '/contact'
     | '/faq'
     | '/instructors'
@@ -384,6 +395,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/login'
     | '/_site/about'
+    | '/_site/cart'
     | '/_site/contact'
     | '/_site/faq'
     | '/_site/instructors'
@@ -464,6 +476,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof SiteAboutRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/cart': {
+      id: '/_site/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof SiteCartRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/contact': {
@@ -660,6 +679,7 @@ declare module '@tanstack/react-router' {
 
 interface SiteRouteChildren {
   SiteAboutRoute: typeof SiteAboutRoute
+  SiteCartRoute: typeof SiteCartRoute
   SiteContactRoute: typeof SiteContactRoute
   SiteFaqRoute: typeof SiteFaqRoute
   SiteInstructorsRoute: typeof SiteInstructorsRoute
@@ -676,6 +696,7 @@ interface SiteRouteChildren {
 
 const SiteRouteChildren: SiteRouteChildren = {
   SiteAboutRoute: SiteAboutRoute,
+  SiteCartRoute: SiteCartRoute,
   SiteContactRoute: SiteContactRoute,
   SiteFaqRoute: SiteFaqRoute,
   SiteInstructorsRoute: SiteInstructorsRoute,

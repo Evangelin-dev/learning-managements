@@ -8,7 +8,7 @@ export function CourseCard({ course }: { course: Course }) {
   const category = getCategory(course.categoryId);
   return (
     <Link
-      to="/courses/$courseId"
+        to="/courses/ai-agentic"
       params={{ courseId: course.id }}
       className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-soft transition-all hover:-translate-y-1 hover:shadow-card"
     >

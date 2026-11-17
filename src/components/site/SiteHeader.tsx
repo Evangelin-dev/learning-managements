@@ -1,8 +1,7 @@
 
 import { Link } from "@tanstack/react-router";
-import { Menu } from "lucide-react";
+import { Menu, Search, ShoppingCart } from "lucide-react";
 import { useState } from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -15,15 +14,14 @@ import { Logo } from "./Logo";
 
 const nav = [
   { to: "/", label: "Home" },
-  { to: "/courses", label: "Courses" },
-  { to: "#services", label: "Services", isAnchor: true },
+  { to: "/courses/ai-agentic", label: "Courses" },
   { to: "/about", label: "About Us" },
   { to: "/instructors", label: "Instructors" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
 const navLinkClass =
-  "relative py-2 font-sans text-base font-medium text-[#001C3C] transition-colors duration-200 hover:text-[#0056B3] hover:after:absolute hover:after:inset-x-0 hover:after:-bottom-0.5 hover:after:h-0.5 hover:after:rounded-full hover:after:bg-[#2EC4CC]";
+  "relative whitespace-nowrap py-2 font-sans text-sm font-medium text-[#001C3C] transition-colors duration-200 hover:text-[#0056B3] hover:after:absolute hover:after:inset-x-0 hover:after:-bottom-0.5 hover:after:h-0.5 hover:after:rounded-full hover:after:bg-[#2EC4CC]";
 
 const activeNavClass =
   "data-[status=active]:text-[#001C3C] data-[status=active]:after:absolute data-[status=active]:after:inset-x-0 data-[status=active]:after:-bottom-0.5 data-[status=active]:after:h-0.5 data-[status=active]:after:rounded-full data-[status=active]:after:bg-[#2EC4CC]";
@@ -33,48 +31,73 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-[#E5EDF3] bg-white shadow-[0_2px_12px_rgba(0,28,60,0.06)]">
-      <div className="container-page flex h-[76px] items-center justify-between gap-4">
+      <div className="container-page flex h-[76px] items-center justify-between gap-3 xl:gap-5">
 
-        {/* Logo */}
-        <Logo />
+        {/* Logo - unchanged */}
+        <div className="shrink-0">
+          <Logo />
+        </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-7 lg:flex">
-          {nav.map((item) =>
-            item.isAnchor ? (
-              <a
-                key={item.to}
-                href={item.to}
-                className={`${navLinkClass} hover:after:content-['']`}
-              >
-                {item.label}
-              </a>
-            ) : (
-              <Link
-                key={item.to}
-                to={item.to}
-                activeOptions={{ exact: item.to === "/" }}
-                className={`${navLinkClass} ${activeNavClass}`}
-              >
-                {item.label}
-              </Link>
-            )
-          )}
+        <nav className="hidden items-center gap-4 xl:flex 2xl:gap-6">
+          {nav.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              activeOptions={{ exact: item.to === "/" }}
+              className={`${navLinkClass} ${activeNavClass}`}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Desktop Actions */}
-        <div className="hidden items-center gap-3 md:flex">
+        {/* Desktop Actions - All in one line */}
+        <div className="hidden shrink-0 items-center gap-3 xl:flex">
+
+          {/* My Learning */}
           <Button
             asChild
             variant="ghost"
-            className="font-sans text-base font-semibold text-[#001C3C] transition-colors hover:bg-[#D6F5F6] hover:text-[#0056B3]"
+            className="whitespace-nowrap font-sans text-sm font-semibold text-[#001C3C] transition-colors hover:bg-[#D6F5F6] hover:text-[#0056B3]"
           >
             <Link to="/dashboard">My Learning</Link>
           </Button>
 
+          {/* Search Bar */}
+          <form
+            action="/courses"
+            method="get"
+            className="flex h-10 w-[170px] items-center rounded-full border border-[#DCE8EF] bg-[#F8FBFD] px-3 transition-all duration-200 focus-within:border-[#2EC4CC] focus-within:ring-2 focus-within:ring-[#2EC4CC]/20 2xl:w-[200px]"
+          >
+            <Search className="h-4 w-4 shrink-0 text-[#0056B3]" />
+            <input
+              type="search"
+              name="q"
+              placeholder="Search courses..."
+              aria-label="Search courses"
+              className="ml-2 min-w-0 w-full bg-transparent font-sans text-sm text-[#001C3C] outline-none placeholder:text-[#8295A5]"
+            />
+          </form>
+
+         
+          {/* Shopping Cart */}
+          <Link
+            to="/cart"
+            aria-label="Shopping cart"
+            className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[#001C3C] transition-colors hover:bg-[#D6F5F6] hover:text-[#0056B3]"
+          >
+            <ShoppingCart className="h-5 w-5" />
+
+            <span className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-[#2EC4CC] text-[10px] font-bold text-[#001C3C]">
+              0
+            </span>
+          </Link>
+
+          {/* Existing Login */}
           <Button
             asChild
-            className="rounded-full bg-[#0056B3] px-6 font-sans text-base font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#004494] hover:shadow-md active:bg-[#003A7D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0056B3]"
+            className="rounded-full bg-[#0056B3] px-6 font-sans text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#004494] hover:shadow-md active:bg-[#003A7D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0056B3]"
           >
             <Link to="/login">Login</Link>
           </Button>
@@ -82,7 +105,7 @@ export function SiteHeader() {
 
         {/* Mobile Menu */}
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild className="md:hidden">
+          <SheetTrigger asChild className="xl:hidden">
             <Button
               variant="outline"
               size="icon"
@@ -93,7 +116,10 @@ export function SiteHeader() {
             </Button>
           </SheetTrigger>
 
-          <SheetContent side="right" className="w-80 border-l border-[#E5EDF3] bg-white">
+          <SheetContent
+            side="right"
+            className="w-80 border-l border-[#E5EDF3] bg-white"
+          >
             <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
 
             <div className="mt-8 flex flex-col gap-2">
@@ -101,37 +127,55 @@ export function SiteHeader() {
                 <Logo />
               </div>
 
-              {nav.map((item) =>
-                item.isAnchor ? (
-                  <a
-                    key={item.to}
-                    href={item.to}
-                    onClick={() => setOpen(false)}
-                    className="rounded-lg border-l-2 border-transparent px-3 py-3 font-sans text-base font-medium text-[#001C3C] transition-colors hover:border-[#2EC4CC] hover:bg-[#D6F5F6] hover:text-[#0056B3]"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    onClick={() => setOpen(false)}
-                    activeOptions={{ exact: item.to === "/" }}
-                    className="rounded-lg border-l-2 border-transparent px-3 py-3 font-sans text-base font-medium text-[#001C3C] transition-colors hover:border-[#2EC4CC] hover:bg-[#D6F5F6] hover:text-[#0056B3] data-[status=active]:border-[#2EC4CC] data-[status=active]:bg-[#D6F5F6] data-[status=active]:font-semibold data-[status=active]:text-[#001C3C]"
-                  >
-                    {item.label}
-                  </Link>
-                )
-              )}
+              {/* Mobile Search */}
+              <form
+                action="/courses"
+                method="get"
+                className="mb-3 flex h-11 items-center rounded-full border border-[#DCE8EF] bg-[#F8FBFD] px-3 focus-within:border-[#2EC4CC]"
+              >
+                <Search className="h-4 w-4 shrink-0 text-[#0056B3]" />
+                <input
+                  type="search"
+                  name="q"
+                  placeholder="Search courses..."
+                  aria-label="Search courses"
+                  className="ml-2 w-full min-w-0 bg-transparent font-sans text-sm text-[#001C3C] outline-none placeholder:text-[#8295A5]"
+                />
+              </form>
+
+              {nav.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  onClick={() => setOpen(false)}
+                  activeOptions={{ exact: item.to === "/" }}
+                  className="rounded-lg border-l-2 border-transparent px-3 py-3 font-sans text-base font-medium text-[#001C3C] transition-colors hover:border-[#2EC4CC] hover:bg-[#D6F5F6] hover:text-[#0056B3] data-[status=active]:border-[#2EC4CC] data-[status=active]:bg-[#D6F5F6] data-[status=active]:font-semibold"
+                >
+                  {item.label}
+                </Link>
+              ))}
 
               <div className="mt-5 grid gap-3 border-t border-[#E5EDF3] pt-5">
+
                 <Button
                   asChild
                   variant="outline"
                   onClick={() => setOpen(false)}
-                  className="h-11 rounded-full border-2 border-[#0056B3] font-sans text-base font-semibold text-[#0056B3] transition-colors hover:bg-[#0056B3] hover:text-white active:bg-[#004494]"
+                  className="h-11 rounded-full border-2 border-[#0056B3] font-sans text-base font-semibold text-[#0056B3] hover:bg-[#0056B3] hover:text-white"
                 >
                   <Link to="/dashboard">My Learning</Link>
+                </Button>
+
+                <Button
+                  asChild
+                  variant="outline"
+                  onClick={() => setOpen(false)}
+                  className="h-11 rounded-full border-2 border-[#DCE8EF] font-sans text-base font-semibold text-[#001C3C] hover:bg-[#D6F5F6]"
+                >
+                  <Link to="/cart">
+                    <ShoppingCart className="mr-2 h-5 w-5" />
+                    Shopping Cart
+                  </Link>
                 </Button>
 
                 <Button

@@ -539,13 +539,13 @@ function Home() {
                 </div>
 
                 <div>
-                  <p className="text-xl font-extrabold text-[#001C3C] md:text-2xl">
-                    50+
-                  </p>
+                 <p className="text-xl font-extrabold text-[#001C3C] md:text-2xl">
+                1
+              </p>
 
-                  <p className="text-[11px] font-medium text-[#4A5B6E] md:text-sm">
-                    Expert Courses
-                  </p>
+              <p className="text-[11px] font-medium text-[#4A5B6E] md:text-sm">
+                Specialized AI Course
+              </p>
                 </div>
               </div>
 
@@ -1311,9 +1311,9 @@ function Home() {
                 <Sparkles size={34} />
               </div>
 
-              <h2 className="text-3xl font-extrabold md:text-5xl">
-                Ready to Start Learning?
-              </h2>
+             <h2 className="text-3xl font-extrabold text-white md:text-5xl">
+              Ready to Start Learning?
+            </h2>
 
               <p className="mx-auto mt-5 max-w-xl leading-7 text-white/70">
                 Take the first step towards building your future.
